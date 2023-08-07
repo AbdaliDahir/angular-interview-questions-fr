@@ -400,66 +400,33 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-9. ### What is a template?
-    A template is a HTML view where you can display data by binding controls to properties of an Angular component. You can store your component's template in one of two places. You can define it inline using the template property, or you can define the template in a separate HTML file and link to it in the component metadata using the @Component decorator's templateUrl property.
-
-    **Using inline template with template syntax,**
-    ```typescript
-    import { Component } from '@angular/core';
-
-    @Component ({
-       selector: 'my-app',
-       template: '
-          <div>
-             <h1>{{title}}</h1>
-             <div>Learn Angular</div>
-          </div>
-       '
-    })
-
-    export class AppComponent {
-       title: string = 'Hello World';
-    }
-    ```
-    **Using separate template file such as app.component.html**
-    ```typescript
-    import { Component } from '@angular/core';
-
-    @Component ({
-       selector: 'my-app',
-       templateUrl: 'app/app.component.html'
-    })
-
-    export class AppComponent {
-       title: string = 'Hello World';
-    }
-    ```
-
-  **[⬆ Back to Top](#table-of-contents)**
-
 10. ### What is a module?
 
-    Modules are logical boundaries in your application and the application is divided into separate modules to separate the functionality of your application.
-    Lets take an example of **app.module.ts** root module declared with **@NgModule** decorator as below,
+    Les modules sont des limites logiques (logical boundaries) dans votre application et l'application est divisée en modules distincts pour séparer la fonctionnalité de votre application. 
+    Prenons l'exemple du module racine app.module.ts déclaré avec le décorateur @NgModule ci-dessous
+
     ```typescript
     import { NgModule }      from '@angular/core';
     import { BrowserModule } from '@angular/platform-browser';
     import { AppComponent }  from './app.component';
-
+    import { DynamicComponent } from './dynamic.component';
     @NgModule ({
        imports:      [ BrowserModule ],
-       declarations: [ AppComponent ],
+       declarations: [ AppComponent, DynamicComponent ],
        bootstrap:    [ AppComponent ],
-       providers: []
+       providers: [],
+       entryComponents: [DynamicComponent]
     })
     export class AppModule { }
     ```
-    The NgModule decorator has five important (among all) options:
-    1. The imports option is used to import other dependent modules. The BrowserModule is required by default for any web based angular application.
-    2. The declarations option is used to define components in the respective module.
-    3. The bootstrap option tells Angular which Component to bootstrap in the application.
-    4. The providers option is used to configure a set of injectable objects that are available in the injector of this module.
-    5. The entryComponents option is a set of components dynamically loaded into the view.
+    Le décorateur @NgModule a cinq options importantes :
+    1. **imports :** Cette option est utilisée pour importer d'autres modules dépendants. Le module BrowserModule est requis par défaut pour toute application Angular basée sur le Web.
+    2. **declarations :** Cette option est utilisée pour définir les composants dans le module respectif.
+    3. **bootstrap :** Cette option indique à Angular quel composant bootstrapper dans l'application.
+    4. **providers :** Cette option est utilisée pour configurer un ensemble d'objets injectables qui sont disponibles dans l'injecteur de ce module.
+    5. **entryComponents :** Cette option est un ensemble de composants chargés dynamiquement dans la vue. (Angular will not instantiate it when the application starts. Instead, Angular will wait until the component is needed and then dynamically load it into the view. This can improve the performance of your application by reducing the number of components that are loaded at startup.)
+
+    Les modules sont un concept important dans Angular car ils permettent de séparer la fonctionnalité de votre application. Cela rend votre application plus facile à comprendre, à tester et à maintenir.
 
   **[⬆ Back to Top](#table-of-contents)**
 
@@ -718,6 +685,43 @@
           }, 2000);
         });
       }
+    }
+    ```
+
+  **[⬆ Back to Top](#table-of-contents)**
+
+9. ### What is a template?
+    Template est une vue HTML où vous pouvez afficher des données en liant des contrôles aux propriétés d'un composant Angular. Vous pouvez stocker le template de votre composant dans l'un des deux emplacements. Vous pouvez le définir en ligne à l'aide de la propriété template, ou vous pouvez définir le template dans un fichier HTML séparé et le lier dans les metadata du composant à l'aide de la propriété templateUrl du décorateur @Component.
+
+    **Using inline template with template syntax,**
+    ```typescript
+    import { Component } from '@angular/core';
+
+    @Component ({
+       selector: 'my-app',
+       template: '
+          <div>
+             <h1>{{title}}</h1>
+             <div>Learn Angular</div>
+          </div>
+       '
+    })
+
+    export class AppComponent {
+       title: string = 'Hello World';
+    }
+    ```
+    **Using separate template file such as app.component.html**
+    ```typescript
+    import { Component } from '@angular/core';
+
+    @Component ({
+       selector: 'my-app',
+       templateUrl: 'app/app.component.html'
+    })
+
+    export class AppComponent {
+       title: string = 'Hello World';
     }
     ```
 

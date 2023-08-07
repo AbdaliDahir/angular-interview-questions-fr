@@ -1,22 +1,7 @@
 # Angular Interview Questions & Answers
 
-> Click :star:if you like the project and follow [@SudheerJonna](https://twitter.com/SudheerJonna) for technical updates. 
+> French Version for <a href=https://github.com/sudheerj/angular-interview-questions>Angular Interview Questions & Answers</a>
 
----
-
-<p align="center">
-  <a href=https://zerotomastery.io/?utm_source=github&utm_medium=sponsor&utm_campaign=angular-interview-questions>
-    <img src=https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=height:70/https://www.filepicker.io/api/file/AKYtjj5SSGyJuyZrkAB2 alt="ZTM Logo" width="100" height="50">
-  </a>
-  <p align="center">
-    <ol>
-    <li>Take this <a href=https://links.zerotomastery.io/angular_sudheer>Angular course</a> to go from a complete Angular beginner to confidently building enterprise-level applications from scratch</li>
-    <li>Take this <a href=https://links.zerotomastery.io/mci_sudheer3>coding interview bootcamp</a> if you’re serious about getting hired and don’t have a CS degree</li>
-    </ol>
-  </p>
-</p>
-
----
 
 ### Table of Contents
 
@@ -305,14 +290,14 @@
 
 1. ### What is Angular Framework?
 
-    Angular is a **TypeScript-based open-source** front-end platform that makes it easy to build web, mobile and desktop applications. The major features of this framework include declarative templates, dependency injection, end to end tooling which ease application development.
+    Angular est un framework Front-end open-source basée sur TypeScript qui facilite la création d'applications web, mobiles et de bureau. Les principales caractéristiques de ce framework incluent des modèles déclaratifs, l'injection de dépendances et des outils de bout en bout qui simplifient le développement d'applications.
 
   **[⬆ Back to Top](#table-of-contents)**
 
 2. ### What is the difference between AngularJS and Angular?
-    Angular is a completely revived component-based framework in which an application is a tree of individual components.
+    Angular est un framework entièrement revitalisé basé sur des composants dans lequel une application est un arbre de composants individuels.
 
-    Here are some of the major differences in tabular format:-
+    Voici quelques-unes des principales différences sous forme de tableau :-
 
     | AngularJS | Angular |
     |---- | ---------
@@ -325,12 +310,12 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 3. ### What is TypeScript?
-    TypeScript is a strongly typed superset of JavaScript created by Microsoft that adds optional types, classes, async/await and many other features, and compiles to plain JavaScript. Angular is written entirely in TypeScript as a primary language.
+    TypeScript est un langage de programmation fortement typé qui s'appuie sur JavaScript et offre de meilleurs outils à n'importe quelle échelle. créé par Microsoft qui ajoute des types optionnels, des classes, des async/await et de nombreuses autres fonctionnalités, et se compile en JavaScript standard. Angular est entièrement écrit en TypeScript en tant que langage principal
     You can install TypeScript globally as
     ```cmd
     npm install -g typescript
     ```
-    Let's see a simple example of TypeScript usage:-
+    exemple of TypeScript usage:-
     ```typescript
     function greeter(person: string) {
         return "Hello, " + person;
@@ -479,28 +464,28 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 11. ### What are lifecycle hooks available?
-    Angular application goes through an entire set of processes or has a lifecycle right from its initiation to the end of the application.
+    Les hooks de cycle de vie Angular sont des méthodes que les développeurs peuvent utiliser pour intercepter des moments importants dans le cycle de vie d'un composant ou d'une directive.
     The representation of lifecycle in pictorial representation as follows,
 
     ![ScreenShot](images/lifecycle.png)
 
     The description of each lifecycle method is as below,
-    1. **ngOnChanges:** When the value of a data bound property changes, then this method is called.
-    2. **ngOnInit:** This is called whenever the initialization of the directive/component after Angular first displays the data-bound properties happens.
-    3. **ngDoCheck:** This is for the detection and to act on changes that Angular can't or won't detect on its own.
-    4. **ngAfterContentInit:** This is called in response after Angular projects external content into the component's view.
-    5. **ngAfterContentChecked:** This is called in response after Angular checks the content projected into the component.
-    6. **ngAfterViewInit:** This is called in response after Angular initializes the component's views and child views.
-    7. **ngAfterViewChecked:** This is called in response after Angular checks the component's views and child views.
-    8. **ngOnDestroy:** This is the cleanup phase just before Angular destroys the directive/component.
+    1. **ngOnChanges:** appelée lorsque la valeur d'une propriété liée aux données change.
+    2. **ngOnInit:**  appelée après que Angular a initialisé le composant ou la directive.
+    3. **ngDoCheck:** appelée après chaque cycle de détection de changement.
+    4. **ngAfterContentInit:** appelée après qu'Angular a initialisé le contenu du composant.
+    5. **ngAfterContentChecked:** appelée après qu'Angular a vérifié le contenu du composant.
+    6. **ngAfterViewInit:** appelée après que Angular a initialisé la vue du composant.
+    7. **ngAfterViewChecked:** appelée après que Angular a vérifié la vue du composant.
+    8. **ngOnDestroy:** appelé lorsque le composant ou directive est détruit. Vous pouvez l'utiliser pour effectuer des tâches de nettoyage avant que le composant soit détruit
 
   **[⬆ Back to Top](#table-of-contents)**
 
 12. ### What is a data binding?
-    Data binding is a core concept in Angular and allows to define communication between a component and the DOM, making it very easy to define interactive applications without worrying about pushing and pulling data. There are four forms of data binding(divided as 3 categories) which differ in the way the data is flowing.
+    Data binding is a core concept in Angular permet de définir la communication entre un composant et le DOM, ce qui rend très facile la creation d'applications interactives sans se soucier de pousser ou de tirer des données. Il existe quatre formes de liaison de données (divisées en 3 catégories) qui diffèrent dans la façon dont les données circulent.
     1. **From the Component to the DOM:**
 
-        **Interpolation:** {{ value }}: Adds the value of a property from the component
+        **Interpolation:** {{ value }}: permet d'afficher une valeur de variable dans le DOM
         ```html
         <li>Name: {{ user.name }}</li>
         <li>Address: {{ user.address }}</li>
@@ -523,7 +508,9 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 13. ### What is metadata?
-    Metadata is used to decorate a class so that it can configure the expected behavior of the class. The metadata is represented by decorators
+    Metadata is used to decorate a class so that it can configure the expected behavior of the class. The metadata is represented by decorators.
+    utilisées pour configurer un composant ou une directive. Elles peuvent être utilisées pour spécifier le nom du composant, le sélecteur HTML, les directives à utiliser, les services à injecter, et bien plus encore.
+    sont définies à l'aide de décorateurs
     1. **Class decorators**, e.g. @Component and @NgModule
         ```typescript
         import { NgModule, Component } from '@angular/core';
@@ -563,7 +550,7 @@
         }
         ```
     3. **Method decorators** Used for methods inside classes, e.g. @HostListener
-        ```typescript
+        ```typescriptNgModule
         import { Component, HostListener } from '@angular/core';
 
         @Component({
@@ -595,8 +582,9 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 14. ### What is angular CLI?
-    Angular CLI(**Command Line Interface**) is a command line interface to scaffold and build angular apps using nodejs style (commonJs) modules.
-    You need to install using below npm command,
+    Angular CLI(**Command Line Interface**) est une interface de ligne de commande pour créer et structurer des applications Angular à l'aide de modules de style Node.js (CommonJS).
+    Vous pouvez l'installer à l'aide de la commande npm suivante :
+
     ```
     npm install @angular/cli@latest
     ```
@@ -618,10 +606,18 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 15. ### What is the difference between constructor and ngOnInit?
-    The **Constructor** is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor.  
-    **ngOnInit** is a life cycle hook called by Angular to indicate that Angular is done creating the component.  
-    Mostly we use ngOnInit for all the initialization/declaration and avoid stuff to work in the constructor. The constructor should only be used to initialize class members but shouldn't do actual "work".
-    So you should use constructor() to setup Dependency Injection and not much else. ngOnInit() is better place to "start" - it's where/when components' bindings are resolved.
+    The **Constructor** iest une méthode par défaut de la classe qui est exécutée lorsque la classe est instanciée et assure l'initialisation correcte des champs dans la classe et ses sous-classes. Angular, ou le Dependency Injector (DI), analyse les paramètres du constructeur et lorsqu'il crée une nouvelle instance en appelant new MyClass(), il tente de trouver des fournisseurs qui correspondent aux types des paramètres du constructeur, les résout et les passe au constructeur.  
+    **ngOnInit** est un hook de cycle de vie appelé par Angular pour indiquer qu'Angular a terminé la création du composant.
+    Nous utilisons généralement ngOnInit pour toutes les initialisations/déclarations et évitons de faire du travail dans le constructeur. Le constructeur ne doit être utilisé que pour initialiser les membres de la classe mais ne doit pas faire de « travail » réel.
+    Vous devez donc utiliser constructor() pour configurer l'injection de dépendances et pas grand-chose d'autre. ngOnInit() est un meilleur endroit pour "commencer" - c'est where/when -là/quand- les liaisons(bindings) des composants sont résolues.
+
+    -------------------
+
+    Le constructeur est appelé en premier, avant que les données liées au composant ne soient initialisées. Il est utilisé pour initialiser les propriétés du composant et pour injecter les dépendances nécessaires.
+
+    ngOnInit est appelé après que les données liées au composant ont été initialisées. Il est utilisé pour effectuer l'initialisation du composant proprement dite, comme la récupération de données à partir d'une API ou l'initialisation d'un service.
+
+    En général, vous devriez utiliser le constructeur pour initialiser les propriétés du composant et pour injecter les dépendances nécessaires. Vous devriez utiliser ngOnInit pour effectuer l'initialisation du composant proprement dite.
 
     ```typescript
     export class App implements OnInit{
@@ -639,7 +635,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 16. ### What is a service?
-    A service is used when a common functionality needs to be provided to various modules. Services allow for greater separation of concerns for your application and better modularity by allowing you to extract common functionality out of components.
+    Service : une classe qui fournit des fonctionnalités réutilisables à d'autres composants. Il est responsable de l'isolation des données et des logiques métier de l'application. Les services sont injectés dans les composants à l'aide de l'injection de dépendances.
 
     Let's create a repoService which can be used across components,
 
@@ -662,10 +658,17 @@
     ```
     The above service uses Http service as a dependency.
 
+    Voici quelques avantages de l'utilisation des services Angular :
+
+    1. **Modularité :** Les services sont des classes indépendantes qui peuvent être injectées dans n'importe quel composant. Cela permet de rendre votre application plus modulaire et facile à tester.
+    2. **Maintenabilité :** Les services séparent les données et la logique métier de l'application. Cela permet de garder votre code plus propre et plus facile à maintenir.
+    3. **Réutilisation :** Les services peuvent être réutilisés dans plusieurs composants. Cela permet de réduire la duplication de code et de rendre votre application plus agile.
+    4. **Testabilité :** Les services sont des classes indépendantes qui peuvent être facilement testées. Cela permet de garantir la qualité de votre code.
+
   **[⬆ Back to Top](#table-of-contents)**
 
 17. ### What is dependency injection in Angular?
-    Dependency injection (DI), is an important application design pattern in which a class asks for dependencies from external sources rather than creating them itself. Angular comes with its own dependency injection framework for resolving dependencies( services or objects that a class needs to perform its function).So you can have your services depend on other services throughout your application.
+    L'injection de dépendances, ou DI, est l'un des concepts fondamentaux d'Angular. La DI est intégrée au framework Angular et permet aux classes avec des décorateurs Angular, tels que les composants, les directives, les pipes et les injectables, de configurer les dépendances dont elles ont besoin.
 
   **[⬆ Back to Top](#table-of-contents)**
 
@@ -697,7 +700,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 19. ### What is the purpose of async pipe?
-    The AsyncPipe subscribes to an observable or promise and returns the latest value it has emitted. When a new value is emitted, the pipe marks the component to be checked for changes.
+    The AsyncPipe permet de gérer les observables et les promesses de manière asynchrone. Il s'abonne(subscribe) à l'observable ou à la promesse et renvoie la dernière valeur qu'il a émise. Lorsqu'une nouvelle valeur est émise, le pipe marque le composant pour être vérifié pour les modifications.
 
     Let's take a time observable which continuously updates the view for every 2 seconds with the current time.
     ```typescript
@@ -721,11 +724,14 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 20. ### What is the option to choose between inline and external template file?
-    You can store your component's template in one of two places. You can define it inline using the **template** property, or you can define the template in a separate HTML file and link to it in the component metadata using the **@Component** decorator's **templateUrl** property.
 
-    The choice between inline and separate HTML is a matter of taste, circumstances, and organization policy. But normally we use inline template for small portion of code and external template file for bigger views. By default, the Angular CLI generates components with a template file. But you can override that with the below command,
+    Vous pouvez stocker le template de votre composant dans l'un des deux emplacements. Vous pouvez le définir inline à l'aide de la propriété **template**, ou vous pouvez définir le template dans un fichier HTML séparé et le lier dans les metadata du composant à l'aide de la décorateur **@Component** propriété **templateUrl**.
+
+    Le choix entre l'HTML inline et l'HTML séparé est une question de goût, de circonstances et de politique d'organisation. Cependant, nous utilisons généralement le template en ligne pour une petite partie du code et le fichier séparé de template externe pour des vues plus grandes. Par défaut, le CLI Angular génère des composants avec un fichier de modèle. Mais vous pouvez le modifier avec la commande ci-dessous,
+
     ```
     ng generate component hero -it
+    ng generate component my-component --inline-template=false
     ```
 
   **[⬆ Back to Top](#table-of-contents)**

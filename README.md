@@ -21,22 +21,17 @@
 |23| [ngIf directive?](#what-is-the-purpose-of-ngif-directive)| 24 | [What happens if you use script tag inside template?](#what-happens-if-you-use-script-tag-inside-template)|
 |25| [How do you categorize data binding types?](#how-do-you-categorize-data-binding-types)|26| [What is interpolation?](#what-is-interpolation)|
 |27| [What are template expressions?](#what-are-template-expressions)| 28| [What are template statements?](#what-are-template-statements)|
-
-
 |29| [What are pipes?](#what-are-pipes)| 30| [What is a parameterized pipe?](#what-is-a-parameterized-pipe)|
 |31| [How do you chain pipes?](#how-do-you-chain-pipes)| 32| [What is a custom pipe?](#what-is-a-custom-pipe)|
 |33| [Give an example of custom pipe?](#give-an-example-of-custom-pipe)| 34| [pure vs impure pipe?](#what-is-the-difference-between-pure-and-impure-pipe)|
 |35| [What is HttpClient and its benefits?](#what-is-httpclient-and-its-benefits)|36| [Explain on how to use HttpClient with an example?](#explain-on-how-to-use-httpclient-with-an-example)
 |37| [How can you read full response?](#how-can-you-read-full-response)|38| [How do you perform Error handling?](#how-do-you-perform-error-handling)|
-
 |39| [What are observables?](#what-are-observables)|40| [What is RxJS?](#what-is-rxjs)|
 |41| [What is subscribing?](#what-is-subscribing)|42| [What is an observable?](#what-is-an-observable)|
 |43| [What is an observer?](#what-is-an-observer)| 44| [promise vs observable?](#what-is-the-difference-between-promise-and-observable)|
 |45| [What is multicasting?](#what-is-multicasting)| 46| [How do you perform error handling in observables?](#how-do-you-perform-error-handling-in-observables)|
 |47| [What is the shorthand notation for subscribe method?](#what-is-the-shorthand-notation-for-subscribe-method)| 48| [What are the utility functions provided by RxJS?](#what-are-the-utility-functions-provided-by-rxjs)|
 |49| [What are observable creation functions?](#what-are-observable-creation-functions)| 50| [What will happen if you do not supply handler for the observer?](#what-will-happen-if-you-do-not-supply-handler-for-the-observer)|
-
-
 |51| [What are Angular elements?](#what-are-angular-elements)|
 |52| [What is the browser support of Angular Elements?](#what-is-the-browser-support-of-angular-elements)|
 |53| [What are custom elements?](#what-are-custom-elements)|

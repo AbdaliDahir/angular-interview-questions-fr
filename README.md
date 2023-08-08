@@ -30,7 +30,7 @@
 |41| [What is subscribing?](#what-is-subscribing)|42| [What is an observable?](#what-is-an-observable)|
 |43| [What is an observer?](#what-is-an-observer)| 44| [promise vs observable?](#what-is-the-difference-between-promise-and-observable)|
 |45| [What is multicasting?](#what-is-multicasting)| 46| [How do you perform error handling in observables?](#how-do-you-perform-error-handling-in-observables)|
-|47| [What is the shorthand notation for subscribe method?](#what-is-the-shorthand-notation-for-subscribe-method)| 48| [What are the utility functions provided by RxJS?](#what-are-the-utility-functions-provided-by-rxjs)|
+|47| [shorthand notation for subscribe method?](#what-is-the-shorthand-notation-for-subscribe-method)| 48| [What are the utility functions provided by RxJS?](#what-are-the-utility-functions-provided-by-rxjs)|
 |49| [What are observable creation functions?](#what-are-observable-creation-functions)| 50| [What will happen if you do not supply handler for the observer?](#what-will-happen-if-you-do-not-supply-handler-for-the-observer)|
 |51| [What are Angular elements?](#what-are-angular-elements)|
 |52| [What is the browser support of Angular Elements?](#what-is-the-browser-support-of-angular-elements)|
@@ -312,16 +312,21 @@
 
 5. ### What are the key components of Angular?
     Angular has the key components below,
-    1. **Component:** These are the basic building blocks of an Angular application to control HTML views.
-    2. **Modules:** An Angular module is a set of angular basic building blocks like components, directives, services etc. An application is divided into logical pieces and each piece of code is called as "module" which perform a single task.
-    3. **Templates:** These represent the views of an Angular application.
-    4. **Services:** Are used to create components which can be shared across the entire application.
-    5. **Metadata:** This can be used to add more data to an Angular class.
+    1. **Component:** Ce sont les blocs de construction fondamentaux d'une application Angular qui contrôlent les vues HTML.
+    2. **Modules:** Un module Angular est un ensemble de blocs de construction de base d'Angular tels que les composants, les directives, les services, etc. Une application est divisée en morceaux logiques et chaque morceau de code est appelé "module" qui effectue une tâche unique. Chaque application Angular a au moins un module racine, généralement appelé `AppModule`
+    3. **Templates:** Ils représentent les vues d'une application Angular.
+    4. **Services:** Les services fournissent des fonctionnalités réutilisables et logiques pour les composants qui peuvent être partagés dans toute l'application.. Ils gèrent généralement les opérations liées aux données, aux appels HTTP, à la gestion des états, etc.
+    5. **Metadata:** Cela peut être utilisé pour ajouter plus de données à une classe Angular.
+    ---
+    6.  **Directives** : Les directives sont des instructions dans le DOM qui modifient le comportement ou l'apparence des éléments DOM. Les directives personnalisées peuvent être créées pour ajouter des fonctionnalités spécifiques.
+    7.  **Router** : Le router permet de gérer la navigation entre différentes vues et composants en fonction des URL et des actions de l'utilisateur.
+    8.  **Observables** : Les observables sont utilisés pour gérer les flux de données asynchrones. Ils jouent un rôle clé dans la gestion des opérations asynchrones telles que les appels HTTP.
+    9.  **Dependency Injection (DI)** : Angular utilise le DI pour injecter des dépendances dans les composants et les services. Cela facilite la gestion des dépendances et améliore la testabilité.
 
   **[⬆ Back to Top](#table-of-contents)**
 
 6. ### What are directives?
-    Directives add behaviour to an existing DOM element or an existing component instance.
+    Les directives ajoutent un comportement à un élément DOM existant ou à une instance de composant existante.
     ```typescript
     import { Directive, ElementRef, Input } from '@angular/core';
 
@@ -333,15 +338,16 @@
     }
     ```
 
-    Now this directive extends HTML element behavior with a yellow background as below
+    Maintenant, cette directive étend le comportement de l'élément HTML avec un arrière-plan jaune comme ci-dessous :
     ```html
     <p myHighlight>Highlight me!</p>
     ```
   **[⬆ Back to Top](#table-of-contents)**
 
 7. ### What are components?
-    Components are the most basic UI building block of an Angular app, which form a tree of Angular components. These components are a subset of directives. Unlike directives, components always have a template, and only one component can be instantiated per element in a template.
-    Let's see a simple example of Angular component
+
+     Les composants sont les éléments de base les plus fondamentaux pour construire l'interface utilisateur d'une application Angular. Ils forment une hiérarchie en arbre de composants Angular. Ces composants sont un sous-ensemble des directives. Contrairement aux directives, les composants ont toujours un template et un seul composant peut être instancié par élément dans un template.
+    Exemple :
     ```typescript
     import { Component } from '@angular/core';
 
@@ -360,20 +366,78 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-8. ### What are the differences between Component and Directive?
-    In a short note, A component(@component) is a directive-with-a-template.
 
-    Some of the major differences are mentioned in a tabular form
+8. ### What is a service?
+    Service : une classe qui fournit des fonctionnalités réutilisables à d'autres composants. Il est responsable de l'isolation des données et des logiques métier de l'application. Les services sont injectés dans les composants à l'aide de l'injection de dépendances.
 
-    | Component | Directive |
-    |---- | ---------
-    | To register a component we use @Component meta-data annotation  | To register a directive we use @Directive meta-data annotation |
-    | Components are typically used to create UI widgets| Directives are used to add behavior to an existing DOM element |
-    | Component is used to break down the application into smaller components| Directive is used to design re-usable components|
-    | Only one component can be present per DOM element | Many directives can be used per DOM element |
-    | @View decorator or templateurl/template are mandatory | Directive doesn't use View|
+    Let's create a repoService which can be used across components,
+
+    ```typescript
+    import { Injectable } from '@angular/core';
+    import { Http } from '@angular/http';
+
+    @Injectable({ // The Injectable decorator is required for dependency injection to work
+      // providedIn option registers the service with a specific NgModule
+      providedIn: 'root',  // This declares the service with the root app (AppModule)
+    })
+    export class RepoService{
+      constructor(private http: Http){
+      }
+
+      fetchAll(){
+        return this.http.get('https://api.github.com/repositories');
+      }
+    }
+    ```
+    The above service uses Http service as a dependency.
+
+    Voici quelques avantages de l'utilisation des services Angular :
+
+    1. **Modularité :** Les services sont des classes indépendantes qui peuvent être injectées dans n'importe quel composant. Cela permet de rendre votre application plus modulaire et facile à tester.
+    2. **Maintenabilité :** Les services séparent les données et la logique métier de l'application. Cela permet de garder votre code plus propre et plus facile à maintenir.
+    3. **Réutilisation :** Les services peuvent être réutilisés dans plusieurs composants. Cela permet de réduire la duplication de code et de rendre votre application plus agile.
+    4. **Testabilité :** Les services sont des classes indépendantes qui peuvent être facilement testées. Cela permet de garantir la qualité de votre code.
 
   **[⬆ Back to Top](#table-of-contents)**
+
+
+9. ### What is a template?
+    Template est une vue HTML où vous pouvez afficher des données en liant des contrôles aux propriétés d'un composant Angular. Vous pouvez stocker le template de votre composant dans l'un des deux emplacements. Vous pouvez le définir en ligne à l'aide de la propriété template, ou vous pouvez définir le template dans un fichier HTML séparé et le lier dans les metadata du composant à l'aide de la propriété templateUrl du décorateur @Component.
+
+    **Using inline template with template syntax,**
+    ```typescript
+    import { Component } from '@angular/core';
+
+    @Component ({
+       selector: 'my-app',
+       template: '
+          <div>
+             <h1>{{title}}</h1>
+             <div>Learn Angular</div>
+          </div>
+       '
+    })
+
+    export class AppComponent {
+       title: string = 'Hello World';
+    }
+    ```
+    **Using separate template file such as app.component.html**
+    ```typescript
+    import { Component } from '@angular/core';
+
+    @Component ({
+       selector: 'my-app',
+       templateUrl: 'app/app.component.html'
+    })
+
+    export class AppComponent {
+       title: string = 'Hello World';
+    }
+    ```
+
+  **[⬆ Back to Top](#table-of-contents)**
+
 
 10. ### What is a module?
 
@@ -405,7 +469,51 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-11. ### What are lifecycle hooks available?
+11. ### What are the differences between Component and Directive?
+    En bref, un composant (@Component) est une directive avec un template.
+
+    Voici certaines des principales différences mentionnées sous forme de tableau.
+
+    | Component | Directive |
+    |---- | ---------
+    | Pour enregistrer un composant, nous utilisons l'annotation de meta-data @Component  | Pour enregistrer une directive, nous utilisons l'annotation de meta-data @Directive |
+    | Les composants sont généralement utilisés pour créer des widgets d'interface utilisateur| Directives are used to add behavior to an existing DOM element |
+    | Le composant est utilisé pour diviser l'application en composants plus petits (smart composants) | La directive est utilisée pour concevoir des composants réutilisables |
+    | Un seul composant peut être présent par élément DOM | De nombreuses directives peuvent être utilisées par élément DOM |
+    | Le décorateur @View ou les attributs templateurl/template sont obligatoires | La directive n'utilise pas de vue |
+
+  **[⬆ Back to Top](#table-of-contents)**
+
+12. ### What is a bootstrapping module?
+    Chaque application a au moins un module Angular, le module racine que vous initialisez pour lancer(bootstrap) l'application est appelé (bootstrapping module). Il est communément connu sous le nom de AppModule. La structure par défaut de l'AppModule générée par Angular CLI serait la suivante :
+	
+	```javascript
+        import { BrowserModule } from '@angular/platform-browser';
+        import { NgModule } from '@angular/core';
+        import { FormsModule } from '@angular/forms';
+        import { HttpClientModule } from '@angular/common/http';
+
+        import { AppComponent } from './app.component';
+
+        /* the AppModule class with the @NgModule decorator */
+        @NgModule({
+          declarations: [
+            AppComponent
+          ],
+          imports: [
+            BrowserModule,
+            FormsModule,
+            HttpClientModule
+          ],
+          providers: [],
+          bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+	```
+
+  **[⬆ Back to Top](#table-of-contents)**
+
+13. ### What are lifecycle hooks available?
     Les hooks de cycle de vie Angular sont des méthodes que les développeurs peuvent utiliser pour intercepter des moments importants dans le cycle de vie d'un composant ou d'une directive.
     The representation of lifecycle in pictorial representation as follows,
 
@@ -423,7 +531,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-12. ### What is a data binding?
+14. ### What is a data binding?
     Permet de définir la communication entre un composant et le DOM, ce qui rend très facile la creation d'applications interactives sans se soucier de pousser ou de tirer des données. Il existe quatre formes de liaison de données (divisées en 3 catégories) qui diffèrent dans la façon dont les données circulent.
     1. **From the Component to the DOM:**
 
@@ -450,7 +558,37 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-13. ### What is metadata?
+
+15. ### How do you categorize data binding types?
+
+     Les types de liaison(Binding types) peuvent être regroupés en trois catégories distinguées par la direction du flux de données. Ils sont énumérés comme suit :
+     1. From the source-to-view
+     2. From view-to-source
+     3. View-to-source-to-view.
+    
+    Details :
+
+    1. **Liaison de propriété (One-Way Binding) :** Cette liaison permet de transférer les données du composant vers le template. Les changements dans le composant sont reflétés dans le template, mais les changements dans le template n'affectent pas le composant. Les types de liaisons de propriété incluent :
+        - {{ expression }} (Interpolation) : Affiche la valeur d'une expression dans le template.
+        - [property]="expression" : Lie la valeur d'une expression à une propriété de l'élément HTML ou d'un composant.
+        - [attr.attribute-name]="expression" : Lie la valeur d'une expression à un attribut HTML.
+    2. **Liaison d'événement (Event Binding) :** Cette liaison permet de transférer les données du template vers le composant. Elle réagit aux événements déclenchés par l'utilisateur et déclenche des actions dans le composant. Les types de liaisons d'événement incluent :
+        - (event)="expression" : Associe une expression du composant à un événement HTML, comme un clic de bouton.
+    3. **Liaison bidirectionnelle (Two-Way Binding) :** Cette liaison permet un flux de données dans les deux sens, à la fois du composant vers le template et du template vers le composant. Les changements dans le composant ou dans le template sont synchronisés instantanément. Le type de liaison bidirectionnelle inclut :
+        - [(ngModel)]="property" : Lie la propriété du composant à un champ de formulaire et permet une mise à jour automatique des deux côtés.
+
+     The possible binding syntax can be tabularized as below,
+
+      | Data direction | Syntax | Type |
+      |---- | --------- | ---- |
+      | From the source-to-view(One-way)  | 1. {{expression}} 2. [target]="expression" 3. bind-target="expression" | Interpolation, Property, Attribute, Class, Style|
+      | From view-to-source(One-way) | 1. (target)="statement" 2. on-target="statement" | Event |
+      | View-to-source-to-view(Two-way)| 1. [(target)]="expression" 2. bindon-target="expression"| Two-way |
+
+  **[⬆ Back to Top](#table-of-contents)**
+
+
+16. ### What is metadata?
     
     Metadata utilisées pour configurer un composant ou une directive. Elles peuvent être utilisées pour spécifier le nom du composant, le sélecteur HTML, les directives à utiliser, les services à injecter, et bien plus encore.
     sont définies à l'aide de décorateurs
@@ -524,7 +662,7 @@
         ```
   **[⬆ Back to Top](#table-of-contents)**
 
-14. ### What is angular CLI?
+17. ### What is angular CLI?
     Angular CLI(**Command Line Interface**) est une interface de ligne de commande pour créer et structurer des applications Angular à l'aide de modules de style Node.js (CommonJS).
     Vous pouvez l'installer à l'aide de la commande npm suivante :
 
@@ -548,7 +686,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-15. ### What is the difference between constructor and ngOnInit?
+18. ### What is the difference between constructor and ngOnInit?
     The **Constructor** est une méthode par défaut de la classe qui est exécutée lorsque la classe est instanciée et assure l'initialisation correcte des champs dans la classe et ses sous-classes. Angular, ou le Dependency Injector (DI), analyse les paramètres du constructeur et lorsqu'il crée une nouvelle instance en appelant new MyClass(), il tente de trouver des fournisseurs qui correspondent aux types des paramètres du constructeur, les résout et les passe au constructeur.  
     **ngOnInit** est un hook de cycle de vie appelé par Angular pour indiquer qu'Angular a terminé la création du composant.
     Nous utilisons généralement ngOnInit pour toutes les initialisations/déclarations et évitons de faire du travail dans le constructeur. Le constructeur ne doit être utilisé que pour initialiser les membres de la classe mais ne doit pas faire de « travail » réel.
@@ -577,45 +715,12 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-16. ### What is a service?
-    Service : une classe qui fournit des fonctionnalités réutilisables à d'autres composants. Il est responsable de l'isolation des données et des logiques métier de l'application. Les services sont injectés dans les composants à l'aide de l'injection de dépendances.
-
-    Let's create a repoService which can be used across components,
-
-    ```typescript
-    import { Injectable } from '@angular/core';
-    import { Http } from '@angular/http';
-
-    @Injectable({ // The Injectable decorator is required for dependency injection to work
-      // providedIn option registers the service with a specific NgModule
-      providedIn: 'root',  // This declares the service with the root app (AppModule)
-    })
-    export class RepoService{
-      constructor(private http: Http){
-      }
-
-      fetchAll(){
-        return this.http.get('https://api.github.com/repositories');
-      }
-    }
-    ```
-    The above service uses Http service as a dependency.
-
-    Voici quelques avantages de l'utilisation des services Angular :
-
-    1. **Modularité :** Les services sont des classes indépendantes qui peuvent être injectées dans n'importe quel composant. Cela permet de rendre votre application plus modulaire et facile à tester.
-    2. **Maintenabilité :** Les services séparent les données et la logique métier de l'application. Cela permet de garder votre code plus propre et plus facile à maintenir.
-    3. **Réutilisation :** Les services peuvent être réutilisés dans plusieurs composants. Cela permet de réduire la duplication de code et de rendre votre application plus agile.
-    4. **Testabilité :** Les services sont des classes indépendantes qui peuvent être facilement testées. Cela permet de garantir la qualité de votre code.
-
-  **[⬆ Back to Top](#table-of-contents)**
-
-17. ### What is dependency injection in Angular?
+19. ### What is dependency injection in Angular?
     L'injection de dépendances, ou DI, est l'un des concepts fondamentaux d'Angular. La DI est intégrée au framework Angular et permet aux classes avec des décorateurs Angular, tels que les composants, les directives, les pipes et les injectables, de configurer les dépendances dont elles ont besoin.
 
   **[⬆ Back to Top](#table-of-contents)**
 
-18. ### How is Dependency Hierarchy formed?
+20. ### How is Dependency Hierarchy formed?
     Injectors in Angular have rules that can be leveraged to achieve the desired visibility of injectables in your applications. By understanding these rules, you can determine in which NgModule, Component, or Directive you should declare a provider.
 
     #### Angular has two injector hierarchies:
@@ -642,68 +747,8 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-19. ### What is the purpose of async pipe?
-    The AsyncPipe permet de gérer les observables et les promesses de manière asynchrone. Il s'abonne(subscribe) à l'observable ou à la promesse et renvoie la dernière valeur qu'il a émise. Lorsqu'une nouvelle valeur est émise, le pipe marque le composant pour être vérifié pour les modifications.
 
-    Let's take a time observable which continuously updates the view for every 2 seconds with the current time.
-    ```typescript
-    @Component({
-      selector: 'async-observable-pipe',
-      template: `<div><code>observable|async</code>:
-           Time: {{ time | async }}</div>`
-    })
-    export class AsyncObservablePipeComponent {
-      time: Observable<string>;
-      constructor() {
-        this.time = new Observable((observer) => {
-          setInterval(() => {
-            observer.next(new Date().toString());
-          }, 2000);
-        });
-      }
-    }
-    ```
-
-  **[⬆ Back to Top](#table-of-contents)**
-
-9. ### What is a template?
-    Template est une vue HTML où vous pouvez afficher des données en liant des contrôles aux propriétés d'un composant Angular. Vous pouvez stocker le template de votre composant dans l'un des deux emplacements. Vous pouvez le définir en ligne à l'aide de la propriété template, ou vous pouvez définir le template dans un fichier HTML séparé et le lier dans les metadata du composant à l'aide de la propriété templateUrl du décorateur @Component.
-
-    **Using inline template with template syntax,**
-    ```typescript
-    import { Component } from '@angular/core';
-
-    @Component ({
-       selector: 'my-app',
-       template: '
-          <div>
-             <h1>{{title}}</h1>
-             <div>Learn Angular</div>
-          </div>
-       '
-    })
-
-    export class AppComponent {
-       title: string = 'Hello World';
-    }
-    ```
-    **Using separate template file such as app.component.html**
-    ```typescript
-    import { Component } from '@angular/core';
-
-    @Component ({
-       selector: 'my-app',
-       templateUrl: 'app/app.component.html'
-    })
-
-    export class AppComponent {
-       title: string = 'Hello World';
-    }
-    ```
-
-  **[⬆ Back to Top](#table-of-contents)**
-
-20. ### What is the option to choose between inline and external template file?
+21. ### What is the option to choose between inline and external template file?
 
     Vous pouvez stocker le template de votre composant dans l'un des deux emplacements. Vous pouvez le définir inline à l'aide de la propriété **template**, ou vous pouvez définir le template dans un fichier HTML séparé et le lier dans les metadata du composant à l'aide de la décorateur **@Component** propriété **templateUrl**.
 
@@ -716,7 +761,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-21. ### What is the purpose of `*ngFor` directive?
+22. ### What is the purpose of `*ngFor` directive?
     Elle est utilisée pour itérer sur une liste d'éléments et générer du contenu HTML répété pour chaque élément de la liste.  
     Très utile pour afficher des listes, des tableaux et d'autres types de données itérables dans une application Angular.
     Example, list users:
@@ -729,7 +774,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-22. ### What is the purpose of `*ngIf` directive?
+23. ### What is the purpose of `*ngIf` directive?
     Elle est utilisée pour conditionnellement ajouter ou supprimer des éléments du DOM en fonction d'une expression booléenne. Cela permet de gérer facilement la visibilité des éléments en fonction de l'état de l'application. 
     Example to display a message if the user age is more than 18:
     ```html
@@ -739,7 +784,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-23. ### What happens if you use script tag inside template?
+24. ### What happens if you use script tag inside template?
 
     Angular reconnaît la valeur comme non sécurisée et la désinfecte automatiquement, ce qui supprime la balise script tout en conservant le contenu sûr tel que le contenu texte de la balise script. De cette manière, cela élimine le risque d'attaques par injection de scripts. Si vous continuez à l'utiliser, il sera ignoré et un avertissement apparaîtra dans la console du navigateur.
 
@@ -755,7 +800,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-24. ### What is interpolation?
+25. ### What is interpolation?
 
     L'interpolation dans Angular est une fonctionnalité qui vous permet d'insérer des valeurs dynamiques dans votre template HTML en utilisant la syntaxe (avec double curky braces) {{ expression }}. Cette expression peut être une variable, une propriété d'objet ou une expression plus complexe. Angular évalue l'expression et affiche la valeur résultante dans le DOM.
 
@@ -770,7 +815,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-25. ### What are template expressions?
+26. ### What are template expressions?
     Une expression de template produit une valeur similaire à n'importe quelle expression JavaScript. Angular exécute l'expression et l'assigne à une propriété d'une binding target; la target peut être un élément HTML, un composant ou une directive. Dans la liaison(binding) de propriété, une expression de template apparaît entre guillemets à droite du symbole = comme dans `[propriété]="expression"`.
     Dans la syntaxe d'interpolation, l'expression de template est entourée de doubles accolades. Par exemple, dans l'interpolation ci-dessous, l'expression de template est {{username}}.
 
@@ -792,7 +837,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-26. ### What are template statements?
+27. ### What are template statements?
     Les "template statements" permettent de lier des actions aux événements déclenchés par l'interaction de l'utilisateur avec l'interface utilisateur de l'application. référence à une action déclenchée par un événement dans le template HTML d'un composant. Ces instructions sont généralement utilisées pour gérer les interactions utilisateur, telles que les clics de boutons, les soumissions de formulaires, les survols de souris, etc.
 
     Un template statement est défini en utilisant la syntaxe d'événement entre parenthèses, comme (event)="action()". Voici un exemple simple pour illustrer :
@@ -812,35 +857,8 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-27. ### How do you categorize data binding types?
-
-     Les types de liaison(Binding types) peuvent être regroupés en trois catégories distinguées par la direction du flux de données. Ils sont énumérés comme suit :
-     1. From the source-to-view
-     2. From view-to-source
-     3. View-to-source-to-view.
-    
-    Details :
-
-    1. **Liaison de propriété (One-Way Binding) :** Cette liaison permet de transférer les données du composant vers le template. Les changements dans le composant sont reflétés dans le template, mais les changements dans le template n'affectent pas le composant. Les types de liaisons de propriété incluent :
-        - {{ expression }} (Interpolation) : Affiche la valeur d'une expression dans le template.
-        - [property]="expression" : Lie la valeur d'une expression à une propriété de l'élément HTML ou d'un composant.
-        - [attr.attribute-name]="expression" : Lie la valeur d'une expression à un attribut HTML.
-    2. **Liaison d'événement (Event Binding) :** Cette liaison permet de transférer les données du template vers le composant. Elle réagit aux événements déclenchés par l'utilisateur et déclenche des actions dans le composant. Les types de liaisons d'événement incluent :
-        - (event)="expression" : Associe une expression du composant à un événement HTML, comme un clic de bouton.
-    3. **Liaison bidirectionnelle (Two-Way Binding) :** Cette liaison permet un flux de données dans les deux sens, à la fois du composant vers le template et du template vers le composant. Les changements dans le composant ou dans le template sont synchronisés instantanément. Le type de liaison bidirectionnelle inclut :
-        - [(ngModel)]="property" : Lie la propriété du composant à un champ de formulaire et permet une mise à jour automatique des deux côtés.
-
-     The possible binding syntax can be tabularized as below,
-
-      | Data direction | Syntax | Type |
-      |---- | --------- | ---- |
-      | From the source-to-view(One-way)  | 1. {{expression}} 2. [target]="expression" 3. bind-target="expression" | Interpolation, Property, Attribute, Class, Style|
-      | From view-to-source(One-way) | 1. (target)="statement" 2. on-target="statement" | Event |
-      | View-to-source-to-view(Two-way)| 1. [(target)]="expression" 2. bindon-target="expression"| Two-way |
-
-  **[⬆ Back to Top](#table-of-contents)**
-
 28. ### What are pipes?
+
     Pipes sont des fonctionnalités qui permettent de transformer les données affichées dans les templates. Les pipes sont utilisés pour formater, filtrer et manipuler les valeurs avant qu'elles ne soient affichées à l'utilisateur.
 
     Exemples :
@@ -873,6 +891,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 29. ### What is a parameterized pipe?
+
     Type de pipe qui accepte des arguments ou des paramètres pour personnaliser la façon dont il transforme les données. Cela permet de rendre les pipes plus flexibles et réutilisables, car vous pouvez ajuster leur comportement en fonction des paramètres fournis.
 
     ```html
@@ -886,6 +905,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 30. ### How do you chain pipes?
+
     Référence à l'utilisation successive de plusieurs pipes pour appliquer des transformations successives aux données. Cela permet de combiner plusieurs opérations de formatage ou de manipulation sur une seule valeur.
 
     Le chaînage de pipes se fait en utilisant le caractère | pour séparer les différents pipes. Chaque pipe dans la chaîne prend le résultat du pipe précédent comme entrée. Voici un exemple :
@@ -897,6 +917,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 31. ### What is a custom pipe?
+
     En plus des pipes intégrés(built-in pipes), vous pouvez écrire votre propre pipe personnalisé avec les caractéristiques clés suivantes :
     1. A pipe est une classe décorée avec les metadata de filtre du décorateur @Pipe, que vous importez depuis la bibliothèque principale d'Angular. Par exemple :
        For example,
@@ -917,6 +938,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 32. ### Give an example of custom pipe?
+
     [Create Custom Pipes with exemple](https://angular.io/guide/pipes-custom-data-trans#creating-pipes-for-custom-data-transformations)
 
     Creation :
@@ -959,7 +981,32 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-33. ### What is the difference between pure and impure pipe?
+33. ### What is the purpose of async pipe?
+    The AsyncPipe permet de gérer les observables et les promesses de manière asynchrone. Il s'abonne(subscribe) à l'observable ou à la promesse et renvoie la dernière valeur qu'il a émise. Lorsqu'une nouvelle valeur est émise, le pipe marque le composant pour être vérifié pour les modifications.
+
+    Let's take a time observable which continuously updates the view for every 2 seconds with the current time.
+    ```typescript
+    @Component({
+      selector: 'async-observable-pipe',
+      template: `<div><code>observable|async</code>:
+           Time: {{ time | async }}</div>`
+    })
+    export class AsyncObservablePipeComponent {
+      time: Observable<string>;
+      constructor() {
+        this.time = new Observable((observer) => {
+          setInterval(() => {
+            observer.next(new Date().toString());
+          }, 2000);
+        });
+      }
+    }
+    ```
+
+  **[⬆ Back to Top](#table-of-contents)**
+
+34. ### What is the difference between pure and impure pipe?
+
     Un pipe pur est appelé uniquement lorsque Angular détecte un changement dans la valeur ou les paramètres transmis à un pipe. Par exemple, tout changement dans une valeur d'entrée primitive (String, Number, Boolean, Symbol) ou une référence d'objet modifiée (Date, Array, Function, Object). Un pipe impur est appelé à chaque cycle de détection de changement, peu importe que la valeur ou les paramètres changent. Autrement dit, un pipe impur est appelé fréquemment, aussi souvent que chaque (keystroke or mouse-move) touche de clavier ou mouvement de souris.
 
     Pour spécifier si un pipe est pur ou impur, vous pouvez utiliser l'option pure dans le décorateur @Pipe. Par défaut, tous les pipes sont purs. Pour créer un pipe impur, définissez l'option pure sur false.
@@ -973,36 +1020,8 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-34. ### What is a bootstrapping module?
-    Chaque application a au moins un module Angular, le module racine que vous initialisez pour lancer(bootstrap) l'application est appelé (bootstrapping module). Il est communément connu sous le nom de AppModule. La structure par défaut de l'AppModule générée par Angular CLI serait la suivante :
-	
-	```javascript
-        import { BrowserModule } from '@angular/platform-browser';
-        import { NgModule } from '@angular/core';
-        import { FormsModule } from '@angular/forms';
-        import { HttpClientModule } from '@angular/common/http';
+35. ### What is HttpClient and its benefits?
 
-        import { AppComponent } from './app.component';
-
-        /* the AppModule class with the @NgModule decorator */
-        @NgModule({
-          declarations: [
-            AppComponent
-          ],
-          imports: [
-            BrowserModule,
-            FormsModule,
-            HttpClientModule
-          ],
-          providers: [],
-          bootstrap: [AppComponent]
-        })
-        export class AppModule { }
-	```
-
-  **[⬆ Back to Top](#table-of-contents)**
-
-36. ### What is HttpClient and its benefits?
     Angular HttpClient est un module fourni par Angular qui facilite les requêtes HTTP et la communication avec les serveurs. Il remplace l'ancien module Http de Angular, on top of `XMLHttpRequest` interface, offrant une interface plus moderne et des fonctionnalités avancées pour gérer les appels réseau dans les applications Angular.
 
     ```javascript
@@ -1019,7 +1038,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-37. ### Explain on how to use `HttpClient` with an example?
+36. ### Explain on how to use `HttpClient` with an example?
     Voici les étapes à suivre pour utiliser `HttpClient`.
     1. Import `HttpClient` into root module:
         ```javascript
@@ -1067,7 +1086,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-38. ### How can you read full response?
+37. ### How can you read full response?
     Le corps de la réponse ne renvoie pas ou peut ne pas renvoyer les données de réponse complètes, car parfois les serveurs renvoient également des en-têtes spéciaux ou des codes d'état importants pour le flux de travail de l'application. Pour obtenir la réponse complète, vous devriez utiliser l'option `observe` de `HttpClient`:
 
     ```javascript
@@ -1080,7 +1099,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-39. ### How do you perform Error handling?
+38. ### How do you perform Error handling?
     Si la requête échoue sur le serveur ou ne parvient pas au serveur en raison de problèmes réseau, alors `HttpClient` renverra un objet d'erreur au lieu d'une réponse réussie. Dans ce cas, vous devez le gérer dans le composant en passant l'objet error en tant que deuxième callback à la méthode subscribe().
     ```javascript
     fetchUser() {
@@ -1094,7 +1113,7 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-35. ### What are observables?
+39. ### What are observables?
     Les observables sont déclaratifs et fournissent un mécanisme de communication entre les éditeurs (publishers) et les abonnés (subscribers) dans votre application. Ils sont principalement utilisés pour la gestion d'événements, la programmation asynchrone et la manipulation de multiples valeurs. Dans ce cas, vous définissez une fonction pour émettre des valeurs, mais celle-ci n'est pas exécutée tant qu'un consommateur ne s'y abonne pas. Le consommateur abonné reçoit ensuite des notifications jusqu'à ce que la fonction soit terminée ou jusqu'à ce qu'il se désabonne.
 
     L'utilisation d'observables facilite la gestion des flux de données asynchrones de manière plus propre et prédictible, en évitant les problèmes liés aux callbacks imbriqués et en offrant des fonctionnalités avancées pour la transformation et la manipulation des données. La bibliothèque RxJS est généralement utilisée pour mettre en œuvre les observables dans Angular.
@@ -1318,7 +1337,6 @@
 
     }
     ```
-
 
   **[⬆ Back to Top](#table-of-contents)**
 

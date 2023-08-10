@@ -10,7 +10,11 @@
 |1 | [Angular?](#what-is-angular-framework)| 2 | [AngularJS vs Angular?](#what-is-the-difference-between-angularjs-and-angular)|
 |3 | [What is TypeScript?](#what-is-typescript)| 4 | [Write a pictorial diagram of Angular architecture?](#write-a-pictorial-diagram-of-angular-architecture)|
 |5 | [What are the key components of Angular?](#what-are-the-key-components-of-angular)| 6 | [What are directives?](#what-are-directives)|
-|7 | [What are components?](#what-are-components)| 8 | [What is a service](#what-is-a-service)|
+|60| [What are the various kinds of directives?](#what-are-the-various-kinds-of-directives)|
+|61| [How do you create directives using CLI?](#how-do-you-create-directives-using-cli)|
+|62| [Give an example for attribute directives?](#give-an-example-for-attribute-directives)
+|7 | [What are components?](#what-are-components)| 59| [What are dynamic components?](#what-are-dynamic-components)
+|8 | [What is a service](#what-is-a-service)|
 |9 | [What is a template?](#what-is-a-template)| 10| [What is a module?](#what-is-a-module)|
 |11| [Component vs Directive?](#what-are-the-differences-between-component-and-directive) | 12 | [What is a bootstrapping module?](#what-is-a-bootstrapping-module)
 |13| [What are lifecycle hooks available?](#what-are-lifecycle-hooks-available)| 14 | [What is a data binding?](#what-is-a-data-binding)
@@ -24,6 +28,9 @@
 |29| [What are pipes?](#what-are-pipes)| 30| [What is a parameterized pipe?](#what-is-a-parameterized-pipe)|
 |31| [How do you chain pipes?](#how-do-you-chain-pipes)| 32| [What is a custom pipe?](#what-is-a-custom-pipe)|
 |33| [Give an example of custom pipe?](#give-an-example-of-custom-pipe)| 34| [pure vs impure pipe?](#what-is-the-difference-between-pure-and-impure-pipe)|
+|202| [What is slice pipe?](#what-is-slice-pipe)| 
+|212| [What is the precedence between pipe and ternary operators?](#what-is-the-precedence-between-pipe-and-ternary-operators)
+|223| [How does angular finds components, directives and pipes?](#how-does-angular-finds-components-directives-and-pipes)|
 |35| [What is HttpClient and its benefits?](#what-is-httpclient-and-its-benefits)|36| [Explain on how to use HttpClient with an example?](#explain-on-how-to-use-httpclient-with-an-example)
 |37| [How can you read full response?](#how-can-you-read-full-response)|38| [How do you perform Error handling?](#how-do-you-perform-error-handling)|
 |39| [What are observables?](#what-are-observables)|40| [What is RxJS?](#what-is-rxjs)|
@@ -31,7 +38,8 @@
 |43| [What is an observer?](#what-is-an-observer)| 44| [promise vs observable?](#what-is-the-difference-between-promise-and-observable)|
 |45| [What is multicasting?](#what-is-multicasting)| 46| [How do you perform error handling in observables?](#how-do-you-perform-error-handling-in-observables)|
 |47| [shorthand notation for subscribe method?](#what-is-the-shorthand-notation-for-subscribe-method)| 48| [What are the utility functions provided by RxJS?](#what-are-the-utility-functions-provided-by-rxjs)|
-|49| [What are observable creation functions?](#what-are-observable-creation-functions)| 50| [What will happen if you do not supply handler for the observer?](#what-will-happen-if-you-do-not-supply-handler-for-the-observer)|
+|49| [What are observable creation functions?](#what-are-observable-creation-functions)| 50| [What will happen if you do not supply handler for the observer?](#what-will-happen-if-you-do-not-supply-handler-for-the-observer)| 
+|131| [What is an rxjs Subject?](#what-is-an-rxjs-Subject)
 |51| [What are Angular elements?](#what-are-angular-elements)|
 |52| [What is the browser support of Angular Elements?](#what-is-the-browser-support-of-angular-elements)|
 |53| [What are custom elements?](#what-are-custom-elements)|
@@ -40,10 +48,10 @@
 |56| [How to transfer components to custom elements?](#how-to-transfer-components-to-custom-elements)|
 |57| [What are the mapping rules between Angular component and custom element?](#what-are-the-mapping-rules-between-angular-component-and-custom-element)|
 |58| [How do you define typings for custom elements?](#how-do-you-define-typings-for-custom-elements)|
-|59| [What are dynamic components?](#what-are-dynamic-components)|
-|60| [What are the various kinds of directives?](#what-are-the-various-kinds-of-directives)|
-|61| [How do you create directives using CLI?](#how-do-you-create-directives-using-cli)|
-|62| [Give an example for attribute directives?](#give-an-example-for-attribute-directives)|
+|140| [How do you pass headers for HTTP client?](#how-do-you-pass-headers-for-http-client)|
+|141| [What is the purpose of differential loading in CLI?](#what-is-the-purpose-of-differential-loading-in-cli)|
+|142| [Is Angular supports dynamic imports?](#is-angular-supports-dynamic-imports)|
+|143| [What is lazy loading?](#what-is-lazy-loading)|
 |63| [What is Angular Router?](#what-is-angular-router)|
 |64| [What is the purpose of base href tag?](#what-is-the-purpose-of-base-href-tag)|
 |65| [What are the router imports?](#what-are-the-router-imports)|
@@ -56,16 +64,39 @@
 |72| [How do you define routes?](#how-do-you-define-routes)|
 |73| [What is the purpose of Wildcard route?](#what-is-the-purpose-of-wildcard-route)|
 |74| [Do I need a Routing Module always?](#do-i-need-a-routing-module-always)|
-|75| [What is Angular Universal?](#what-is-angular-universal)|
-|76| [What are different types of compilation in Angular?](#what-are-different-types-of-compilation-in-angular)|
+|237| [How does forRoot method helpful to avoid duplicate router instances?](#how-does-forroot-method-helpful-to-avoid-duplicate-router-instances)|
+|198| [What is router state?](#what-is-router-state)|139| [How do you detect route change in Angular?](#how-do-you-detect-route-change-in-angular)|
+|271| [How do you get the current route?](#how-do-you-get-the-current-route)|
 |77| [What is JIT?](#what-is-jit)|
 |78| [What is AOT?](#what-is-aot)|
+|190| [What is AOT compiler?](#what-is-aot-compiler)|
+|83| [What are the three phases of AOT?](#what-are-the-three-phases-of-aot)|
+|84| [Can I use arrow functions in AOT?](#can-i-use-arrow-functions-in-aot)|
 |79| [Why do we need compilation process?](#why-do-we-need-compilation-process)|
 |80| [What are the advantages with AOT?](#what-are-the-advantages-with-aot)|
 |81| [What are the ways to control AOT compilation?](#what-are-the-ways-to-control-aot-compilation)|
+|111| [What is Angular Ivy?](#what-is-angular-ivy)|
+|112| [What are the features included in ivy preview?](#what-are-the-features-included-in-ivy-preview)|
+|113| [Can I use AOT compilation with Ivy?](#can-i-use-aot-compilation-with-ivy)|
+|129| [What is a DI token?](#what-is-a-di-token)|
+|130| [What is Angular DSL?](#what-is-angular-dsl)|
+|256| [What are reactive forms?](#what-are-reactive-forms)|
+|257| [What are dynamic forms?](#what-are-dynamic-forms)|
+|258| [What are template driven forms?](#what-are-template-driven-forms)|
+|259| [What are the differences between reactive forms and template driven forms?](#what-are-the-differences-between-reactive-forms-and-template-driven-forms)|
+|260| [What are the different ways to group form controls?](#what-are-the-different-ways-to-group-form-controls)|
+|261| [How do you update specific properties of a form model?](#how-do-you-update-specific-properties-of-a-form-model)|
+|262| [What is the purpose of FormBuilder?](#what-is-the-purpose-of-formbuilder)|
+|263| [How do you verify the model changes in forms?](#how-do-you-verify-the-model-changes-in-forms)|
+|264| [What are the state CSS classes provided by ngModel?](#what-are-the-state-css-classes-provided-by-ngmodel)|
+|265| [How do you reset the form?](#how-do-you-reset-the-form)|
+|266| [What are the types of validator functions?](#what-are-the-types-of-validator-functions)|
+|267| [Can you give an example of built-in validators?](#can-you-give-an-example-of-built-in-validators)|
+|268| [How do you optimize the performance of async validators?](#how-do-you-optimize-the-performance-of-async-validators)|
+
+|75| [What is Angular Universal?](#what-is-angular-universal)|
+|76| [What are different types of compilation in Angular?](#what-are-different-types-of-compilation-in-angular)|
 |82| [What are the restrictions of metadata?](#what-are-the-restrictions-of-metadata)|
-|83| [What are the three phases of AOT?](#what-are-the-three-phases-of-aot)|
-|84| [Can I use arrow functions in AOT?](#can-i-use-arrow-functions-in-aot)|
 |85| [What is the purpose of metadata json files?](#what-is-the-purpose-of-metadata-json-files)|
 |86| [Can I use any javascript feature for expression syntax in AOT?](#can-i-use-any-javascript-feature-for-expression-syntax-in-aot)|
 |87| [What is folding?](#what-is-folding)|
@@ -92,9 +123,6 @@
 |108| [What is a service worker and its role in Angular?](#what-is-a-service-worker-and-its-role-in-angular)|
 |109| [What are the design goals of service workers?](#what-are-the-design-goals-of-service-workers)|
 |110| [What are the differences between AngularJS and Angular with respect to dependency injection?](#what-are-the-differences-between-angularjs-and-angular-with-respect-to-dependency-injection)|
-|111| [What is Angular Ivy?](#what-is-angular-ivy)|
-|112| [What are the features included in ivy preview?](#what-are-the-features-included-in-ivy-preview)|
-|113| [Can I use AOT compilation with Ivy?](#can-i-use-aot-compilation-with-ivy)|
 |114| [What is Angular Language Service?](#what-is-angular-language-service)|
 |115| [How do you install angular language service in the project?](#how-do-you-install-angular-language-service-in-the-project)|
 |116| [Is there any editor support for Angular Language Service?](#is-there-any-editor-support-for-angular-language-service)|
@@ -110,21 +138,12 @@
 |126| [What are class field decorators?](#what-are-class-field-decorators)|
 |127| [What is declarable in Angular?](#what-is-declarable-in-angular)|
 |128| [What are the restrictions on declarable classes?](#what-are-the-restrictions-on-declarable-classes)|
-|129| [What is a DI token?](#what-is-a-di-token)|
-|130| [What is Angular DSL?](#what-is-angular-dsl)|
-|131| [What is an rxjs Subject?](#what-is-an-rxjs-Subject)|
 |132| [What is Bazel tool?](#what-is-bazel-tool)|
 |133| [What are the advantages of Bazel tool?](#what-are-the-advantages-of-bazel-tool)|
 |134| [How do you use Bazel with Angular CLI?](#how-do-you-use-bazel-with-angular-cli)|
 |135| [How do you run Bazel directly?](#how-do-you-run-bazel-directly)|
 |136| [What is platform in Angular?](#what-is-platform-in-angular)|
-|137| [What happens if I import the same module twice?](#what-happens-if-i-import-the-same-module-twice)|
 |138| [How do you select an element with in a component template?](#how-do-you-select-an-element-with-in-a-component-template)|
-|139| [How do you detect route change in Angular?](#how-do-you-detect-route-change-in-angular)|
-|140| [How do you pass headers for HTTP client?](#how-do-you-pass-headers-for-http-client)|
-|141| [What is the purpose of differential loading in CLI?](#what-is-the-purpose-of-differential-loading-in-cli)|
-|142| [Is Angular supports dynamic imports?](#is-angular-supports-dynamic-imports)|
-|143| [What is lazy loading?](#what-is-lazy-loading)|
 |144| [What are workspace APIs?](#what-are-workspace-apis)|
 |145| [How do you upgrade angular version?](#how-do-you-upgrade-angular-version)|
 |146| [What is Angular Material?](#what-is-angular-material)|
@@ -171,29 +190,25 @@
 |187| [How do you report missing translations?](#how-do-you-report-missing-translations)|
 |188| [How do you provide build configuration for multiple locales?](#how-do-you-provide-build-configuration-for-multiple-locales)|
 |189| [What is an angular library?](#what-is-an-angular-library)|
-|190| [What is AOT compiler?](#what-is-aot-compiler)|
 |191| [How do you select an element in component template?](#how-do-you-select-an-element-in-component-template)|
 |192| [What is TestBed?](#what-is-testbed)|
 |193| [What is protractor?](#what-is-protractor)|
 |194| [What is collection?](#what-is-collection)|
 |195| [How do you create schematics for libraries?](#how-do-you-create-schematics-for-libraries)|
+|137| [What happens if I import the same module twice?](#what-happens-if-i-import-the-same-module-twice)|
 |196| [How do you use jquery in Angular?](#how-do-you-use-jquery-in-angular)|
 |197| [What is the reason for No provider for HTTP exception?](#what-is-the-reason-for-no-provider-for-http-exception)|
-|198| [What is router state?](#what-is-router-state)|
 |199| [How can I use SASS in angular project?](#how-can-i-use-sass-in-angular-project)|
 |200| [What is the purpose of hidden property?](#what-is-the-purpose-of-hidden-property)|
 |201| [What is the difference between ngIf and hidden property?](#what-is-the-difference-between-ngif-and-hidden-property)|
-|202| [What is slice pipe?](#what-is-slice-pipe)|
 |203| [What is index property in ngFor directive?](#what-is-index-property-in-ngfor-directive)|
 |204| [What is the purpose of ngFor trackBy?](#what-is-the-purpose-of-ngfor-trackby)|
-|205| [What is the purpose of ngSwitch directive?](#what-is-the-purpose-of-ngswitch-directive)|
 |206| [Is it possible to do aliasing for inputs and outputs?](#is-it-possible-to-do-aliasing-for-inputs-and-outputs)|
 |207| [What is safe navigation operator?](#what-is-safe-navigation-operator)|
 |208| [Is any special configuration required for Angular9?](#is-any-special-configuration-required-for-angular9)|
 |209| [What are type safe TestBed API changes in Angular9?](#what-are-type-safe-testbed-api-changes-in-angular9)|
 |210| [Is mandatory to pass static flag for ViewChild?](#is-mandatory-to-pass-static-flag-for-viewchild)|
 |211| [What are the list of template expression operators?](#what-are-the-list-of-template-expression-operators)
-|212| [What is the precedence between pipe and ternary operators?](#what-is-the-precedence-between-pipe-and-ternary-operators)
 |213| [What is an entry component?](#what-is-an-entry-component)|
 |214| [What is a bootstrapped component?](#what-is-a-bootstrapped-component)|
 |215| [How do you manually bootstrap an application?](#how-do-you-manually-bootstrap-an-application)|
@@ -203,8 +218,8 @@
 |219| [Do I still need to use entryComponents array in Angular9?](do-i-still-need-to-use-entrycomponents-array-in-angular9#)|
 |220| [Is it all components generated in production build?](#is-it-all-components-generated-in-production-build)|
 |221| [What is Angular compiler?](#what-is-angular-compiler)|
+|205| [What is the purpose of ngSwitch directive?](#what-is-the-purpose-of-ngswitch-directive)|
 |222| [What is the role of ngModule metadata in compilation process?](#what-is-the-role-of-ngmodule-metadata-in-compilation-process)|
-|223| [How does angular finds components, directives and pipes?](#how-does-angular-finds-components-directives-and-pipes)|
 |224| [Give few examples for NgModules?](#give-few-examples-for-ngmodules)|
 |225| [What are feature modules?](#what-are-feature-modules)|
 |226| [What are the imported modules in CLI generated feature modules?](#what-are-the-imported-modules-in-cli-generated-feature-modules)|
@@ -218,7 +233,6 @@
 |234| [How do you restrict provider scope to a module?](#how-do-you-restrict-provider-scope-to-a-module)|
 |235| [How do you provide a singleton service?](#how-do-you-provide-a-singleton-service)|
 |236| [What are the different ways to remove duplicate service registration?](#what-are-the-different-ways-to-remove-duplicate-service-registration)|
-|237| [How does forRoot method helpful to avoid duplicate router instances?](#how-does-forroot-method-helpful-to-avoid-duplicate-router-instances)|
 |238| [What is a shared module?](#what-is-a-shared-module)|
 |239| [Can I share services using modules?](#can-i-share-services-using-modules)|
 |240| [How do you get current direction for locales??](#how-do-you-get-current-direction-for-locales)|
@@ -237,22 +251,8 @@
 |253| [Is it mandatory to use injectable on every service class?](#is-it-mandatory-to-use-injectable-on-every-service-class)|
 |254| [What is an optional dependency?](#what-is-an-optional-dependency)|
 |255| [What are the types of injector hierarchies?](#what-are-the-types-of-injector-hierarchies)|
-|256| [What are reactive forms?](#what-are-reactive-forms)|
-|257| [What are dynamic forms?](#what-are-dynamic-forms)|
-|258| [What are template driven forms?](#what-are-template-driven-forms)|
-|259| [What are the differences between reactive forms and template driven forms?](#what-are-the-differences-between-reactive-forms-and-template-driven-forms)|
-|260| [What are the different ways to group form controls?](#what-are-the-different-ways-to-group-form-controls)|
-|261| [How do you update specific properties of a form model?](#how-do-you-update-specific-properties-of-a-form-model)|
-|262| [What is the purpose of FormBuilder?](#what-is-the-purpose-of-formbuilder)|
-|263| [How do you verify the model changes in forms?](#how-do-you-verify-the-model-changes-in-forms)|
-|264| [What are the state CSS classes provided by ngModel?](#what-are-the-state-css-classes-provided-by-ngmodel)|
-|265| [How do you reset the form?](#how-do-you-reset-the-form)|
-|266| [What are the types of validator functions?](#what-are-the-types-of-validator-functions)|
-|267| [Can you give an example of built-in validators?](#can-you-give-an-example-of-built-in-validators)|
-|268| [How do you optimize the performance of async validators?](#how-do-you-optimize-the-performance-of-async-validators)|
 |269| [How to set ngFor and ngIf on the same element?](#how-to-set-ngfor-and-ngif-on-the-same-element)|
 |270| [What is host property in css?](#what-is-host-property-in-css)|
-|271| [How do you get the current route?](#how-do-you-get-the-current-route)|
 |272| [What is Component Test Harnesses?](#what-is-component-test-harnesses)|
 |273| [What is the benefit of Automatic Inlining of Fonts?](#what-is-the-benefit-of-automatic-inlining-of-fonts)|
 |274| [What is content projection?](#what-is-content-projection)|
@@ -265,14 +265,21 @@
 
 1. ### What is Angular Framework?
 
-    Angular est un framework Front-end open-source basée sur TypeScript qui facilite la création d'applications web, mobiles et de bureau. Les principales caractéristiques de ce framework incluent des modèles déclaratifs, l'injection de dépendances et des outils de bout en bout qui simplifient le développement d'applications.
+    <u>Angular est un framework Front-end open-source basée sur TypeScript qui facilite la création d'applications web, mobiles et de bureau.</u> Les principales caractéristiques de ce framework incluent des modèles déclaratifs, l'injection de dépendances et des outils de bout en bout qui simplifient le développement d'applications.
 
   **[⬆ Back to Top](#table-of-contents)**
 
 2. ### What is the difference between AngularJS and Angular?
-    Angular est un framework entièrement revitalisé basé sur des composants dans lequel une application est un arbre de composants individuels.
+    <u>AngularJS et Angular sont deux frameworks de développement web créés par Google,ils sont diffèrent considérablement dans leur conception, leurs fonctionnalités et leur architecture.</u>
 
-    Voici quelques-unes des principales différences sous forme de tableau :-
+    1. **Langage de programmation :**  <u>AngularJS utilise JavaScript classique, tandis qu'Angular est construit en utilisant TypeScript.</u>
+    2. **Architecture :** <u>Angular utilise une architecture basée sur des composants qui favorise une séparation claire entre la logique métier et l'interface utilisateur, ce qui facilite la réutilisation des composants. par contre AngularJs basé sur MVC</u>
+    3. **Modularité :** Angular encourage l'utilisation de modules et de services pour organiser et structurer le code de manière plus modulaire et maintenable.
+    3. **Concept :** Angular adopte un certain nombre de concepts modernes de développement web, tels que les composants, les modules, les services, le routage et la gestion avancée de l'état, entre autres.
+    3. **Performances :** En raison de sa conception modernisée, Angular a généralement de meilleures performances que AngularJS, notamment en ce qui concerne la manipulation du DOM.
+
+
+    Et voici quelques-unes des principales différences sous forme de tableau :-
 
     | AngularJS | Angular |
     |---- | ---------
@@ -285,7 +292,7 @@
   **[⬆ Back to Top](#table-of-contents)**
 
 3. ### What is TypeScript?
-    TypeScript est un langage de programmation fortement typé qui s'appuie sur JavaScript et offre de meilleurs outils à n'importe quelle échelle. créé par Microsoft qui ajoute des types optionnels, des classes, des async/await et de nombreuses autres fonctionnalités, et se compile en JavaScript standard. Angular est entièrement écrit en TypeScript en tant que langage principal
+    <u>TypeScript est un langage de programmation fortement typé qui s'appuie sur JavaScript </u> et offre de meilleurs outils à n'importe quelle échelle. <u>créé par Microsoft</u> qui ajoute des types optionnels, des classes, des async/await et de nombreuses autres fonctionnalités, et se compile en JavaScript standard. Angular est entièrement écrit en TypeScript en tant que langage principal
     You can install TypeScript globally as
     ```cmd
     npm install -g typescript
@@ -304,29 +311,27 @@
 
   **[⬆ Back to Top](#table-of-contents)**
 
-4. ### Write a pictorial diagram of Angular architecture?
-    The main building blocks of an Angular application are shown in the diagram below:-
-    ![ScreenShot](images/architecture.png)
-
-  **[⬆ Back to Top](#table-of-contents)**
-
 5. ### What are the key components of Angular?
-    Angular has the key components below,
-    1. **Component:** Ce sont les blocs de construction fondamentaux d'une application Angular qui contrôlent les vues HTML.
-    2. **Modules:** Un module Angular est un ensemble de blocs de construction de base d'Angular tels que les composants, les directives, les services, etc. Une application est divisée en morceaux logiques et chaque morceau de code est appelé "module" qui effectue une tâche unique. Chaque application Angular a au moins un module racine, généralement appelé `AppModule`
-    3. **Templates:** Ils représentent les vues d'une application Angular.
-    4. **Services:** Les services fournissent des fonctionnalités réutilisables et logiques pour les composants qui peuvent être partagés dans toute l'application.. Ils gèrent généralement les opérations liées aux données, aux appels HTTP, à la gestion des états, etc.
-    5. **Metadata:** Cela peut être utilisé pour ajouter plus de données à une classe Angular.
+    Angular a les composants clés ci-dessous :
+    1. **[Component](#what-are-components):** Ce sont les blocs de construction fondamentaux d'une application Angular.<u> Ils contrôlent les vues HTML et encapsulent à la fois la logique et la présentation.</u>.
+    2. **[Modules:](#what-is-a-module)** <u>Les modules sont utilisés pour organiser et structurer l'application. Ils regroupent des composants, des directives, des services et d'autres fonctionnalités liées.</u>. Une application est divisée en morceaux logiques et chaque morceau de code est appelé "module" qui effectue une tâche unique. Chaque application Angular a au moins un module racine, généralement appelé `AppModule`
+    3. **[Templates](#what-is-a-template):** <u>Ils représentent les vues d'une application Angular.</u> Ils sont généralement écrits en HTML avec des balises et des directives spécifiques à Angular.
+    4. **[Services:](#What-is-a-service)** <u>Les services fournissent des fonctionnalités réutilisables et logiques</u> pour les composants qui peuvent être partagés dans toute l'application. <u>Ils gèrent généralement les opérations liées aux données, aux appels HTTP, à la gestion des états, etc.</u>
+    5. **[Metadata](#What-is-metadata):** <u>Cela peut être utilisé pour ajouter plus de données à une classe Angular.</u> Elles sont fournies sous forme d'annotations de décorateur, comme **@Component** et **@Directive**.
     ---
-    6.  **Directives** : Les directives sont des instructions dans le DOM qui modifient le comportement ou l'apparence des éléments DOM. Les directives personnalisées peuvent être créées pour ajouter des fonctionnalités spécifiques.
-    7.  **Router** : Le router permet de gérer la navigation entre différentes vues et composants en fonction des URL et des actions de l'utilisateur.
-    8.  **Observables** : Les observables sont utilisés pour gérer les flux de données asynchrones. Ils jouent un rôle clé dans la gestion des opérations asynchrones telles que les appels HTTP.
-    9.  **Dependency Injection (DI)** : Angular utilise le DI pour injecter des dépendances dans les composants et les services. Cela facilite la gestion des dépendances et améliore la testabilité.
+    6.  **[Directives](#What-is-a-service)** : <u>les directives d'Angular sont des classes qui ajoutent un comportement supplémentaire aux éléments du DOM.</u> Les directives personnalisées peuvent être créées pour ajouter des fonctionnalités spécifiques.
+        * Structural directives : directive est structurelle lorsqu'elle modifie la structure du DOM, c'est-à-dire lorsqu'on ajoute, supprime ou déplace une balise.(*NgIf,*NgFor,*NgSwitch)
+        * Structural directives : une directive d'attribut, on parle d'une directive qui change un attribut de l'élément du DOM, sans modifier la structure du DOM dans son ensemble. (NgClass,NgStyle,NgModel...)
+    7.  **[Router](#what-is-angular-router)** : <u>Le router permet de gérer la navigation entre différentes vues et composants en fonction des URL et des actions de l'utilisateur.</u> permet la navigation d’une vue à l’autre de l’application lorsque l’utilisateur interagit avec le DOM.
+        * router-outlet : indiquer l'emplacement d'insertion du composant: `<router-outlet></router-outlet>`
+        * routerLink : permet d'intercepter l'événement click sur les liens et de changer de "route" sans recharger toute l'application. (href).
+    8.  **[Observables](#what-are-observables)** : Les observables sont utilisés pour gérer les flux de données asynchrones. Ils jouent un rôle clé dans la gestion des opérations asynchrones telles que les appels HTTP.
+    9.  **[Dependency Injection (DI)](#what-is-dependency-injection-in-angular)** : Angular utilise le DI pour injecter des dépendances dans les composants et les services. Cela facilite la gestion des dépendances et améliore la testabilité.
 
   **[⬆ Back to Top](#table-of-contents)**
 
 6. ### What are directives?
-    Les directives ajoutent un comportement à un élément DOM existant ou à une instance de composant existante.
+   <u> Les directives ajoutent un comportement à un élément DOM existant ou à une instance de composant existante.</u>
     ```typescript
     import { Directive, ElementRef, Input } from '@angular/core';
 
@@ -346,7 +351,7 @@
 
 7. ### What are components?
 
-     Les composants sont les éléments de base les plus fondamentaux pour construire l'interface utilisateur d'une application Angular. Ils forment une hiérarchie en arbre de composants Angular. Ces composants sont un sous-ensemble des directives. Contrairement aux directives, les composants ont toujours un template et un seul composant peut être instancié par élément dans un template.
+    Les composants sont les éléments de base les plus fondamentaux pour construire l'interface utilisateur d'une application Angular. Ils forment une hiérarchie en arbre de composants Angular. Ces composants sont un sous-ensemble des directives. Contrairement aux directives, les composants ont toujours un template et un seul composant peut être instancié par élément dans un template.
     Exemple :
     ```typescript
     import { Component } from '@angular/core';
